@@ -18,7 +18,9 @@ var mustache = require("mustache");
  */
 function generatePublish() {
     del(["./Publish"]).then(paths => {
-        mkdirp("./Publish/Controllers");
+        mkdirp("./Publish/Controllers", function() {
+            startServer();
+        });
         mkdirp("./Publish/Models");
         mkdirp("./Publish/Views");
         mkdirp("./Publish/Public", function (error) {
@@ -35,11 +37,17 @@ function generatePublish() {
  * Iniciar o servidor automaticamente
  */
 
- function startServer() {
+function startServer() {
     var config = JSON.parse(fs.readFileSync("./Server/config.json"));
-    var template = fs.readFileSync("./Server/server.mustache");
+    var template = fs.readFileSync("./Server/server.mustache").toString();
+
     var output = mustache.render(template, config);
- }
+
+    fs.writeFile("./Publish/index.js", output, err => {
+        if (err) throw err;
+        childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=8080"] });
+    });
+}
 
 /********
  * exportar as funçoes
