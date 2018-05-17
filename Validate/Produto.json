@@ -1,0 +1,57 @@
+{
+	"definitions": {
+		"produto": {
+			"description": "Um produto",
+			"type": "object",
+			"required": ["nome", "modelo", "preco", "informacao", "data"],
+			"properties": {
+				"nome": {
+					"description": "Nome do produto",
+					"type": "string"
+				},
+				"modelo": {
+					"description": "Modelo do produto",
+					"type": "string"
+				},
+				"preco": {
+					"description": "preco do produto",
+					"type": "number"
+				},
+				"informacao": {
+					"description": "descrição do produto",
+					"type": "string"
+				},
+				"data": {
+					"description": "data de producao",
+					"type": "string",
+					"format": "date"
+				}
+			}
+		},
+
+		"marca": {
+			"type": "object",
+			"required": ["nome"],
+			"properties": {
+				"nome": {
+					"description": "Nome da marca",
+					"type": "string"
+				}
+			}
+		}
+	},
+	"allOf": [
+		{
+			"$ref": "#/definitions/produto"
+		},
+		{
+			"type": "object",
+			"required": ["marca"],
+			"properties": {
+				"marca": {
+					"$ref": "#/definitions/marca"
+				}
+			}
+		}
+	]
+}

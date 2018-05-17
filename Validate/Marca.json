@@ -1,0 +1,11 @@
+{
+    "title" : "marca",
+    "type": "object",
+    "required": ["nome"],
+    "properties": {
+        "nome": {
+            "description": "Nome da marca",
+            "type": "string"
+        }
+    }
+}
