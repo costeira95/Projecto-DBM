@@ -3,7 +3,7 @@
 		"produto": {
 			"description": "Um produto",
 			"type": "object",
-			"required": ["nome", "modelo", "preco", "informacao", "data"],
+			"required": ["nome", "modelo", "preco", "informacao", "stock", "data"],
 			"properties": {
 				"nome": {
 					"description": "Nome do produto",
@@ -20,6 +20,10 @@
 				"informacao": {
 					"description": "descrição do produto",
 					"type": "string"
+				},
+				"stock" : {
+					"description" : "stock do produto",
+					"type" : "integer"
 				},
 				"data": {
 					"description": "data de producao",
@@ -49,7 +53,7 @@
 			"required": ["marca"],
 			"properties": {
 				"marca": {
-					"$ref": "#/definitions/marca"
+					"$ref" : "#/definitions/marca"
 				}
 			}
 		}

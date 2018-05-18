@@ -1,7 +1,6 @@
 /************************
  * Importar os módulos
  * utilizados
- * 
  */
 var express = require('express');
 var app = express();
