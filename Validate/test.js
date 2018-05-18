@@ -12,6 +12,7 @@ var ajv = Ajv({ allErrors: true });
 var produto_schema = JSON.parse(fs.readFileSync("./Validate/Produto.json"));
 var marca_schema = JSON.parse(fs.readFileSync("./Validate/Marca.json"));
 var venda_schema = JSON.parse(fs.readFileSync("./Validate/Venda.json"));
+var destaques_schema = JSON.parse(fs.readFileSync("./Validate/Destaques.json"));
 
 /*************************
  * Criação de objectos para teste
@@ -44,9 +45,47 @@ var venda = {
     }
 };
 
+var destaques = {
+    "destaques" : [
+        {
+            "data" : "1995-03-18",
+            "produto" : 
+            {
+                "nome" : "Teste",
+                "modelo" : "teste",
+                "preco" : 20.5,
+                "informacao" : "ola",
+                "stock" : 2,
+                "data" : "1995-03-18",
+                "marca" : {
+                    "nome" : "teste"
+                }
+            }
+        },
+
+        {
+            "data" : "1995-03-18",
+            "produto" : 
+            {
+                "nome" : "Teste",
+                "modelo" : "teste",
+                "preco" : 20.5,
+                "informacao" : "ola",
+                "stock" : 2,
+                "data" : "1995-03-18",
+                "marca" : {
+                    "nome" : "teste"
+                }
+            }
+        }
+    ]
+};
+
 var marca =  {
     "nome" : "testar"
 }
+
+
 /***********************************
  * Função de teste de schemas
  */
@@ -64,3 +103,4 @@ function test(data, schema) {
 test(produto, produto_schema);
 test(marca, marca_schema);
 test(venda, venda_schema);
+test(destaques, destaques_schema);
