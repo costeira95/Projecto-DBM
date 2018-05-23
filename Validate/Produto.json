@@ -42,6 +42,17 @@
 					"type": "string"
 				}
 			}
+		},
+
+		"categoria" : {
+		"type": "object",
+		"required": ["nome"],
+		"properties": {
+			"name": {
+				"description": "Nome da categoria",
+				"type": "string"
+				}
+			}
 		}
 	},
 	"allOf": [
@@ -54,6 +65,9 @@
 			"properties": {
 				"marca": {
 					"$ref" : "#/definitions/marca"
+				},
+				"categoria" : {
+					"$ref" : "#/definitions/categoria"
 				}
 			}
 		}
