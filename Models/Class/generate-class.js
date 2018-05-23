@@ -27,13 +27,16 @@ function generate(class_schema, title, props) {
 
 function generateClassProps(class_schema, classes_properties, definitions = false, allOf = false) {
         if(class_schema != null && classes_properties.length != 0) {
-            var props;
+            var props = [];
             if(definitions === false && allOf === false) {
                 props = Object.keys(class_schema.properties)
+            } else if(definitions === true && allOf === false) {
+                classes_properties.forEach(key => {
+                    props.push(Object.keys(class_schema.definitions.key.properties));
+                }); 
             }
-            console.log(props);
             return props;
         }
 }
 
-module.exports.generate = generate;
+module.exports.generate = generateClassProps;

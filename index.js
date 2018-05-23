@@ -41,7 +41,7 @@ function generateFolders (req, res) {
 
 function generateClasses (req, res) {
     //class_generator.generate(marca_schema, "Marca");
-    class_generator.generate(marca_schema, ["marca"]);
+    class_generator.generate(produto_schema, ["produto","marca"], true);
     res.send(200);
 }
 
