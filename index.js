@@ -23,6 +23,7 @@ app.use(express.static("public"));
 var produto_schema = JSON.parse(fs.readFileSync("./Validate/Produto.json"));
 var marca_schema = JSON.parse(fs.readFileSync("./Validate/Marca.json"));
 var venda_schema = JSON.parse(fs.readFileSync("./Validate/Venda.json"));
+var categoria_schema = JSON.parse(fs.readFileSync("./Validate/Categoria.json"));
 var destaques_schema = JSON.parse(fs.readFileSync("./Validate/Destaques.json"));
 
 /***************************
@@ -40,12 +41,14 @@ function generateFolders (req, res) {
 }
 
 function generateClasses (req, res) {
-    //class_generator.generate(marca_schema, "Marca");
-    class_generator.generate(produto_schema, ["produto","marca"], true);
+    class_generator.generate(produto_schema, "Produto", ["produto"], true, true, 1);
+    class_generator.generate(venda_schema, "Venda", ["venda"], true, true, 1);
+    class_generator.generate(marca_schema, "Marca");
+    class_generator.generate(categoria_schema, "Categoria");
     res.send(200);
 }
 
-/****************************+
+/****************************
  * Iniciar o servidor
  */
 var server = app.listen(5000, function() {
