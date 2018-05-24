@@ -47,7 +47,7 @@ function startIndex() {
 }
 
 function start() {
-  childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=8080"] });
+  childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=2000"] });
 }
 
 function generateDatabase(){
