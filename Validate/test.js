@@ -1,106 +1,27 @@
-/************************
- * Importar os módulos
- * utilizados
- */
 var Ajv = require("ajv");
 var fs = require("fs");
 var ajv = Ajv({ allErrors: true });
 
-/******************************
- * Definir os schemas a serem testados
- */
-var produto_schema = JSON.parse(fs.readFileSync("./Validate/Produto.json"));
-var marca_schema = JSON.parse(fs.readFileSync("./Validate/Marca.json"));
-var venda_schema = JSON.parse(fs.readFileSync("./Validate/Venda.json"));
-var destaques_schema = JSON.parse(fs.readFileSync("./Validate/Destaques.json"));
+var schema_categoria = JSON.parse(fs.readFileSync("./Models/Schemas/categoria.json"));
+var categorias = JSON.parse(fs.readFileSync("./Validate/categorias.json"));
 
-/*************************
- * Criação de objectos para teste
- */
-var produto = {
-    "nome" : "Teste",
-    "modelo" : "teste",
-    "preco" : 20.5,
-    "informacao" : "ola",
-    "stock" : 2,
-    "data" : "1995-03-18",
-    "marca" : {
-        "nome" : "oi"
-    }
-};
-
-var venda = {
-    "quantidade" : 1,
-    "data" : "1995-03-18",
-    "produto" : {
-        "nome" : "Teste",
-        "modelo" : "teste",
-        "preco" : 20.5,
-        "informacao" : "ola",
-        "stock" : 2,
-        "data" : "1995-03-18",
-        "marca" : {
-            "nome" : "teste"
-        }
-    }
-};
-
-var destaques = {
-    "destaques" : [
-        {
-            "data" : "1995-03-18",
-            "produto" : 
-            {
-                "nome" : "Teste",
-                "modelo" : "teste",
-                "preco" : 20.5,
-                "informacao" : "ola",
-                "stock" : 2,
-                "data" : "1995-03-18",
-                "marca" : {
-                    "nome" : "teste"
-                }
-            }
-        },
-
-        {
-            "data" : "1995-03-18",
-            "produto" : 
-            {
-                "nome" : "Teste",
-                "modelo" : "teste",
-                "preco" : 20.5,
-                "informacao" : "ola",
-                "stock" : 2,
-                "data" : "1995-03-18",
-                "marca" : {
-                    "nome" : "teste"
-                }
-            }
-        }
-    ]
-};
-
-var marca =  {
-    "nome" : "testar"
-}
+var schema_marca = JSON.parse(fs.readFileSync("./Models/Schemas/marca.json"));
+var marcas = JSON.parse(fs.readFileSync("./Validate/marcas.json"));
 
 
 /***********************************
  * Função de teste de schemas
  */
 function test(data, schema) {
-    console.log(data);
-    var validate = ajv.compile(schema);
-    var valid = validate(data);
-    if (valid) console.log("Valid!");
-    else console.log("Invalid: " + ajv.errorsText(validate.errors));
+  console.log(data);
+  var validate = ajv.compile(schema);
+  var valid = validate(data);
+  if (valid) console.log("Valid!");
+  else console.log("Invalid: " + ajv.errorsText(validate.errors));
 }
 
-/*********************
- * Testes realizados
- */
-test(produto, produto_schema);
-test(marca, marca_schema);
-test(venda, venda_schema);
-test(destaques, destaques_schema);
+test(categorias[0], schema_categoria);
+test(categorias[1], schema_categoria);
+
+test(marcas[0], schema_marca);
+test(marcas[1], schema_marca);

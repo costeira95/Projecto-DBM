@@ -1,59 +1,48 @@
-/************************
- * Importar os módulos
- * utilizados
- */
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
+var express = require("express");
+var bodyParser = require("body-parser");
 var fs = require('fs');
-var server_module = require('./Server/server');
-var class_generator = require('./Models/Class/generate-class');
-/***************************
- * Definir o middleware
- */
+
+var server_module = require("./Server/server");
+var class_generator = require("./Models/Class/generate-class")
+var db_generator = require('./Models/Database/generate-database');
+
+
+var app = express();
+
+
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-/****************************
- * Definir schemas para gerar
- * as classes
- */
+app.post("/generateFolders", generateFolders);
+app.post("/generateClasses", generateClasses);
+app.post("/generateDatabase", generateDatabase);
 
-var produto_schema = JSON.parse(fs.readFileSync("./Validate/Produto.json"));
-var marca_schema = JSON.parse(fs.readFileSync("./Validate/Marca.json"));
-var venda_schema = JSON.parse(fs.readFileSync("./Validate/Venda.json"));
-var categoria_schema = JSON.parse(fs.readFileSync("./Validate/Categoria.json"));
-var destaques_schema = JSON.parse(fs.readFileSync("./Validate/Destaques.json"));
 
-/***************************
- * Funções REST
- */
-app.post("/generate", generateFolders);
-app.post("/generateClass", generateClasses);
+var schema_categoria = JSON.parse(fs.readFileSync("./Models/Schemas/categoria.json"));
+var schema_marca = JSON.parse(fs.readFileSync("./Models/Schemas/marca.json"));
+var schema_produto = JSON.parse(fs.readFileSync("./Models/Schemas/produto.json"));
 
-/***************************
- * Funçoes para usar no REST
- */
-function generateFolders (req, res) {
-        server_module.generatePublish();
-        res.send(200);
+function generateFolders(req, res) {
+  server_module.generatePublish();
+  res.sendStatus(200);
 }
 
-function generateClasses (req, res) {
-    class_generator.generate(produto_schema, "Produto", ["produto"], true, true, 1);
-    class_generator.generate(venda_schema, "Venda", ["venda"], true, true, 1);
-    class_generator.generate(marca_schema, "Marca");
-    class_generator.generate(categoria_schema, "Categoria");
-    res.send(200);
+function generateClasses(req, res) {
+  class_generator.generate(schema_categoria);
+  class_generator.generate(schema_marca);
+  class_generator.generate(schema_produto);
+  res.sendStatus(200);
 }
 
-/****************************
- * Iniciar o servidor
- */
+function generateDatabase(req, res) {
+  server_module.generateDatabase();
+  res.sendStatus(200);
+}
+
 var server = app.listen(5000, function() {
-    var host = server.address().host;
-    var port = server.address().port;
+  var host = server.address().address;
+  var port = server.address().port;
 
-    console.log("Listening at http://%s:%s", host, port);
+  console.log("Listening at http://%s:%s", host, port);
 });

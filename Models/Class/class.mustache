@@ -1,5 +1,35 @@
-class {{classTitle}} {
-    constructor({{classProperties}}) {
-        {{{classConstructor}}}
+var database = require('../../sqlite.js')('./Publish/Database/{{dbname}}');
+
+function {{title}} ({{propertiesJoin}}) {
+    this.id = 0;
+    {{#properties}}
+        this.{{name}} = {{name}};
+        {{^required}}Object.defineProperty(this,'{{name}}',{ enumerable:false});{{/required}}         
+    {{/properties}}
+        Object.defineProperty(this,'{{primaryKey.name}}',{ enumerable:false});
+}
+
+{{title}}.all = function (callback) {
+    //fazer a chamada à função all do database
+    database.all("SELECT * FROM {{table}}", this, callback);
+}
+
+{{title}}.get = function (id, callback) {
+     database.get("SELECT * FROM {{table}} WHERE {{title}}_id = " + id, [], this, callback);
+}
+
+{{title}}.prototype.save = function (callback) {
+    if(this.{{primaryKey.name}}) { //Se existir valor no id será para update
+        //fazer a chamada à função run do database para atualizar o registo
+        database.run("UPDATE {{table}} SET {{{propertiesSetValues}}} WHERE {{title}}_id = " + this.id + "", [{{propertiesJoinThis}}], callback);
+    } else { //caso contrário para insert
+        //fazer a chamada à função run do database para inserir o registo
+        database.run("INSERT INTO {{table}}({{columnNames}}) VALUES({{propertiesValuesParams}})", [{{propertiesJoinThis}}], callback);
     }
 }
+
+{{title}}.mappingDBtoObject = {
+    {{{mappingDBtoObject}}}
+}
+
+module.exports = {{title}};

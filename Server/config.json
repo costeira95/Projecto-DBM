@@ -1,6 +1,21 @@
 {
-    "port" : 8080,
-    "modules" : {
-        "express" : true
+  "port": 8080,
+  "dbname": "projeto_dbm.db",
+  "models": [
+    {
+      "name": "categoria",
+      "path": "./Models/Schemas/categoria.json"
+    },
+    {
+      "name": "marca",
+      "path": "./Models/Schemas/marca.json"
+    },
+    {
+      "name": "produto",
+      "path": "./Models/Schemas/produto.json"
     }
+  ],
+  "modules": {
+    "express": true
+  }
 }

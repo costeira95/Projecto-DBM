@@ -1,55 +1,64 @@
-/************************
- * Importar os módulos
- * utilizados
- * 
- */
-
 var fs = require("fs");
 var mkdirp = require("mkdirp");
 var del = require("del");
 var childProcess = require("child_process");
 var mustache = require("mustache");
+var db_generator = require("../Models/Database/generate-database");
 
-/***********************************
- * 
- * Server para gerar as pastas
- * automaticamente no modelo MVC
- * 
- */
+var config = JSON.parse(fs.readFileSync("./Server/config.json"));
+
 function generatePublish() {
-    del(["./Publish"]).then(paths => {
-        mkdirp("./Publish/Controllers", function() {
-            startServer();
-        });
-        mkdirp("./Publish/Models");
-        mkdirp("./Publish/Views");
-        mkdirp("./Publish/Public", function (error) {
-            if (!error) {
-                mkdirp("./Publish/Public/css");
-                mkdirp("./Publish/Public/images");
-                mkdirp("./Publish/Public/js");
-            }
-        });
-    });
+  del(["./Publish"]).then(paths => createFolders(startIndex));
 }
 
-/*************************************
- * Iniciar o servidor automaticamente
- */
+function createFolders(callback) {
+  
+  mkdirp("./Publish/Controllers", function(err) {
+      callback();
+  });
 
-function startServer() {
-    var config = JSON.parse(fs.readFileSync("./Server/config.json"));
-    var template = fs.readFileSync("./Server/server.mustache").toString();
+  mkdirp("./Publish/Models", function(err) {});
 
-    var output = mustache.render(template, config);
+  mkdirp("./Publish/Public", function(err) {
+    if (!err) {
+      mkdirp("./Publish/Public/css", function(err) {});
 
-    fs.writeFile("./Publish/index.js", output, err => {
-        if (err) throw err;
-        childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=8080"] });
-    });
+      mkdirp("./Publish/Public/images", function(err) {});
+
+      mkdirp("./Publish/Public/js", function(err) {});
+    }
+  });
+
+  mkdirp("./Publish/Views", function(err) {});
+
+  mkdirp("./Publish/Database", function(err) {});
 }
 
-/********
- * exportar as funçoes
- */
-module.exports.generatePublish = generatePublish;
+function startIndex() {
+  
+  var template = fs.readFileSync("./Server/server.mustache").toString();
+
+  var output = mustache.render(template, config);
+
+  fs.writeFile("./Publish/index.js", output, err => {
+    if (err) throw err;
+    start();
+  });
+}
+
+function start() {
+  childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=8080"] });
+}
+
+function generateDatabase(){
+  var schemas = [];
+
+  config.models.forEach(model => {
+      schemas.push(JSON.parse(fs.readFileSync(model.path)));
+  })
+
+  db_generator.generate(config.dbname, schemas);
+}
+
+module.exports.generatePublish = generatePublish; 
+module.exports.generateDatabase = generateDatabase; 
