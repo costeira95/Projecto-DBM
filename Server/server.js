@@ -7,11 +7,11 @@ var db_generator = require("../Models/Database/generate-database");
 
 var config = JSON.parse(fs.readFileSync("./Server/config.json"));
 
-function generatePublish() {
-  del(["./Publish"]).then(paths => createFolders(startIndex));
+function gerarPastaPublish() {
+  del(["./Publish"]).then(paths => criarPastas(startIndex));
 }
 
-function createFolders(callback) {
+function criarPastas(callback) {
   
   mkdirp("./Publish/Controllers", function(err) {
       callback();
@@ -47,10 +47,10 @@ function startIndex() {
 }
 
 function start() {
-  childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=2000"] });
+  childProcess.fork("./Publish/index.js", [], { execArgv: ["--debug=8080"] });
 }
 
-function generateDatabase(){
+function gerarBd(){
   var schemas = [];
 
   config.models.forEach(model => {
@@ -60,5 +60,5 @@ function generateDatabase(){
   db_generator.generate(config.dbname, schemas);
 }
 
-module.exports.generatePublish = generatePublish; 
-module.exports.generateDatabase = generateDatabase; 
+module.exports.gerarPastaPublish = gerarPastaPublish; 
+module.exports.gerarBd = gerarBd; 

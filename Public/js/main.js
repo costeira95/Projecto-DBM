@@ -9,14 +9,18 @@ function exec(path){
     xhr.send();
 }
 
-function generateFolders() {
-    exec("/generateFolders");
+function gerarPastas() {
+    exec("/gerarPastas");
 }
 
-function generateClasses() {
-    exec("/generateClasses");
+function gerarClasses() {
+    exec("/gerarClasses");
 }
 
-function generateDatabase() {
-    exec("/generateDatabase");
+function gerarBd() {
+    exec("/gerarBd");
+}
+
+function gerarApi() {
+    exec("/gerarApi");
 }

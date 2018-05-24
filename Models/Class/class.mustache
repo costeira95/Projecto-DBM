@@ -28,6 +28,11 @@ function {{title}} ({{propertiesJoin}}) {
     }
 }
 
+{{title}}.delete = function (id, callback) {
+//fazer a chamada à função run do database para apagar o registo
+database.run("DELETE FROM {{table}} WHERE {{title}}_id = " + id, [], callback);
+}
+
 {{title}}.mappingDBtoObject = {
     {{{mappingDBtoObject}}}
 }

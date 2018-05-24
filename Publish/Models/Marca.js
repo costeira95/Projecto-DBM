@@ -26,6 +26,11 @@ marca.prototype.save = function (callback) {
     }
 }
 
+marca.delete = function (id, callback) {
+//fazer a chamada à função run do database para apagar o registo
+database.run("DELETE FROM marcas WHERE marca_id = " + id, [], callback);
+}
+
 marca.mappingDBtoObject = {
     nome:'nome',marca_id:'id'
 }

@@ -26,6 +26,11 @@ categoria.prototype.save = function (callback) {
     }
 }
 
+categoria.delete = function (id, callback) {
+//fazer a chamada à função run do database para apagar o registo
+database.run("DELETE FROM categorias WHERE categoria_id = " + id, [], callback);
+}
+
 categoria.mappingDBtoObject = {
     nome:'nome',categoria_id:'id'
 }

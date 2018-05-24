@@ -36,6 +36,11 @@ produto.prototype.save = function (callback) {
     }
 }
 
+produto.delete = function (id, callback) {
+//fazer a chamada à função run do database para apagar o registo
+database.run("DELETE FROM produtos WHERE produto_id = " + id, [], callback);
+}
+
 produto.mappingDBtoObject = {
     nome:'nome',descricao:'descricao',preco:'preco',stock:'stock',categoria:'categoria',marca:'marca',produto_id:'id'
 }
