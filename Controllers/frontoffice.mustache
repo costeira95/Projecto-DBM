@@ -1,8 +1,18 @@
 var express = require('express');
-var router = express.Router();
+var app = express();
+var mustacheExpress = require('mustache-express');
 
-router.get('/',function(req,res) {
-    res.send('View: Frontoffice');
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache');
+app.set('views', './Publish/Views');
+
+
+app.get('/',function(req, res) {
+    //res.send('View: Frontoffice');
+    res.render('welcome', {
+        title: 'Hey',
+        message : 'Hello there!'
+    });
 });
 
-module.exports = router;
+module.exports = app;
