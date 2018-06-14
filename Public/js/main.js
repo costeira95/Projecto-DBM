@@ -24,3 +24,11 @@ function gerarBd() {
 function gerarApi() {
     exec("/gerarApi");
 }
+
+function gerarFrontOffice() {
+    exec("/gerarFrontOffice");
+}
+
+function gerarBackOffice() {
+    exec("/gerarBackOffice");
+}

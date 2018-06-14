@@ -7,6 +7,8 @@ var class_generator = require("./Models/Class/generate-class")
 var api_generator = require("./Controllers/generate-api")
 var db_generator = require('./Models/Database/generate-database');
 
+var frontoffice_generate = require("./Controllers/generate-frontoffice");
+var backoffice_generate = require("./Controllers/generate-backoffice");
 
 var app = express();
 
@@ -19,6 +21,8 @@ app.post("/gerarPastas", gerarPastas);
 app.post("/gerarClasses", gerarClasses);
 app.post("/gerarBd", gerarBd);
 app.post("/gerarApi", gerarApi);
+app.post("/gerarFrontOffice", frontoffice_generate.generate);
+app.post("/gerarBackOffice", backoffice_generate.generate);
 
 
 var schema_categoria = JSON.parse(fs.readFileSync("./Models/Schemas/categoria.json"));
