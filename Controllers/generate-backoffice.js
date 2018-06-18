@@ -3,8 +3,8 @@ var fs = require("fs");
 
 var template = fs.readFileSync("./Controllers/backoffice.mustache").toString();
 
-function generate(view){
-    var output = mustache.render(template, view);
+function generate(schemas){
+    var output = mustache.render(template, schemas);
     console.log(output);
     fs.writeFileSync("./Publish/Controllers/backoffice.js", output);
 }

@@ -2,6 +2,12 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
+var mustacheExpress = require('mustache-express');
+
+app.engine('mustache', mustacheExpress());
+app.set('view engine', 'mustache');
+app.set('views', './StaticFiles');
+
 var api_routes = require('./Controllers/api.js');
 var frontoffice_routes = require('./Controllers/frontoffice.js');
 var backoffice_routes = require('./Controllers/backoffice.js');

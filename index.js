@@ -22,7 +22,7 @@ app.post("/gerarClasses", gerarClasses);
 app.post("/gerarBd", gerarBd);
 app.post("/gerarApi", gerarApi);
 app.post("/gerarFrontOffice", frontoffice_generate.generate);
-app.post("/gerarBackOffice", backoffice_generate.generate);
+app.post("/gerarBackOffice",gerarBackOffice );
 
 
 var schema_categoria = JSON.parse(fs.readFileSync("./Models/Schemas/categoria.json"));
@@ -48,6 +48,11 @@ function gerarBd(req, res) {
 
 function gerarApi(req, res) {
   api_generator.generate({schema_categoria, schema_marca, schema_produto});
+  res.sendStatus(200);
+}
+
+function gerarBackOffice(req, res) {
+  backoffice_generate.generate(schema_produto);
   res.sendStatus(200);
 }
 

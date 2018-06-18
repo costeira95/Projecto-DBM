@@ -11,7 +11,6 @@ function generate(schemas){
           }); 
       }
     }
-
     var output = mustache.render(template, view);
     console.log(output);
     fs.writeFileSync("./Publish/Controllers/api.js", output);
