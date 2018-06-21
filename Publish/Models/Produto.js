@@ -41,6 +41,10 @@ produto.delete = function (id, callback) {
 database.run("DELETE FROM produtos WHERE produto_id = " + id, [], callback);
 }
 
+produto.many = function (model, id, callback) {
+    database.where(`SELECT produto.* FROM produto INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = produto.${model.toLowerCase()}_id WHERE produto.${model.toLowerCase()}_id=` +id, [], this,  callback);
+}
+
 produto.mappingDBtoObject = {
     nome:'nome',descricao:'descricao',preco:'preco',stock:'stock',categoria:'categoria',marca:'marca',produto_id:'id'
 }

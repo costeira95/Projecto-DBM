@@ -31,6 +31,10 @@ categoria.delete = function (id, callback) {
 database.run("DELETE FROM categorias WHERE categoria_id = " + id, [], callback);
 }
 
+categoria.many = function (model, id, callback) {
+    database.where(`SELECT categoria.* FROM categoria INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = categoria.${model.toLowerCase()}_id WHERE categoria.${model.toLowerCase()}_id=` +id, [], this,  callback);
+}
+
 categoria.mappingDBtoObject = {
     nome:'nome',categoria_id:'id'
 }

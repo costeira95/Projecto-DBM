@@ -33,6 +33,10 @@ function {{title}} ({{propertiesJoin}}) {
 database.run("DELETE FROM {{table}} WHERE {{title}}_id = " + id, [], callback);
 }
 
+{{title}}.many = function (model, id, callback) {
+    database.where(`SELECT {{title}}.* FROM {{title}} INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = {{title}}.${model.toLowerCase()}_id WHERE {{title}}.${model.toLowerCase()}_id=` +id, [], this,  callback);
+}
+
 {{title}}.mappingDBtoObject = {
     {{{mappingDBtoObject}}}
 }

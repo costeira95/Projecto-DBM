@@ -20,7 +20,7 @@
     <table>
         <tr>
             {{#columns}}
-            <th>{{name}}</th>
+                <th>{{nome}}</th>
             {{/columns}}
         </tr>
         {{#rows}}
@@ -33,7 +33,7 @@
             {{#actions}}
             <td>
                 {{#link}}
-                    <a href="{{link}}" title="{{tooltip}}" {{#events}}{{name}}="javascript:{{function}}({{args}})" {{/events}}>
+                    <a href="{{link}}" title="{{tooltip}}" {{#events}}{{nome}}="javascript:{{function}}({{args}})" {{/events}}>
                         {{label}}
                         {{#image}}
                             <img src="{{src}}" alt="{{alt}}" />

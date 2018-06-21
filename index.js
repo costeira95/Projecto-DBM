@@ -25,9 +25,9 @@ app.post("/gerarFrontOffice", frontoffice_generate.generate);
 app.post("/gerarBackOffice",gerarBackOffice );
 
 
-var schema_categoria = JSON.parse(fs.readFileSync("./Models/Schemas/categoria.json"));
-var schema_marca = JSON.parse(fs.readFileSync("./Models/Schemas/marca.json"));
-var schema_produto = JSON.parse(fs.readFileSync("./Models/Schemas/produto.json"));
+var schema_categoria = require("./Models/Schemas/categoria.js");
+var schema_marca = require("./Models/Schemas/marca.js");
+var schema_produto = require("./Models/Schemas/produto.js");
 
 function gerarPastas(req, res) {
   server_module.gerarPastaPublish();
@@ -52,7 +52,8 @@ function gerarApi(req, res) {
 }
 
 function gerarBackOffice(req, res) {
-  backoffice_generate.generate(schema_produto);
+  backoffice_generate.generate({schema_categoria, schema_marca, schema_produto});
+  
   res.sendStatus(200);
 }
 

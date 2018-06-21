@@ -1,4 +1,4 @@
-{
+module.exports = {
     "title": "categoria",
     "type": "object",
     "properties": {

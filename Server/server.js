@@ -54,7 +54,7 @@ function gerarBd(){
   var schemas = [];
 
   config.models.forEach(model => {
-      schemas.push(JSON.parse(fs.readFileSync(model.path)));
+      schemas.push(require(model.path));
   })
 
   db_generator.generate(config.dbname, schemas);

@@ -31,6 +31,10 @@ marca.delete = function (id, callback) {
 database.run("DELETE FROM marcas WHERE marca_id = " + id, [], callback);
 }
 
+marca.many = function (model, id, callback) {
+    database.where(`SELECT marca.* FROM marca INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = marca.${model.toLowerCase()}_id WHERE marca.${model.toLowerCase()}_id=` +id, [], this,  callback);
+}
+
 marca.mappingDBtoObject = {
     nome:'nome',marca_id:'id'
 }

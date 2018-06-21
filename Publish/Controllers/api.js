@@ -51,6 +51,13 @@ router.delete('/categoria/:id', function (req, res) {
     });
 });
 
+router.get('/categoria/:model/:id', function (req, res) {
+    categoria.many(req.params.model, req.params.id, function (rows) {
+        res.json(rows);
+    });
+});
+
+
 //marcas
 
 router.post('/marca', function (req, res) {
@@ -87,6 +94,13 @@ router.delete('/marca/:id', function (req, res) {
     });
 });
 
+router.get('/marca/:model/:id', function (req, res) {
+    marca.many(req.params.model, req.params.id, function (rows) {
+        res.json(rows);
+    });
+});
+
+
 //produtos
 
 router.post('/produto', function (req, res) {
@@ -122,5 +136,12 @@ router.delete('/produto/:id', function (req, res) {
         });
     });
 });
+
+router.get('/produto/:model/:id', function (req, res) {
+    produto.many(req.params.model, req.params.id, function (rows) {
+        res.json(rows);
+    });
+});
+
 
 module.exports = router;

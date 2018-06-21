@@ -51,6 +51,13 @@ router.delete('/{{title}}/:id', function (req, res) {
         });
     });
 });
+
+router.get('/{{title}}/:model/:id', function (req, res) {
+    {{title}}.many(req.params.model, req.params.id, function (rows) {
+        res.json(rows);
+    });
+});
+
 {{/properties}}
 
 module.exports = router;

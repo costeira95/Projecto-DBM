@@ -4,15 +4,15 @@
   "models": [
     {
       "name": "categoria",
-      "path": "./Models/Schemas/categoria.json"
+      "path": "./../Models/Schemas/categoria.js"
     },
     {
       "name": "marca",
-      "path": "./Models/Schemas/marca.json"
+      "path": "./../Models/Schemas/marca.js"
     },
     {
       "name": "produto",
-      "path": "./Models/Schemas/produto.json"
+      "path": "./../Models/Schemas/produto.js"
     }
   ],
   "modules": {

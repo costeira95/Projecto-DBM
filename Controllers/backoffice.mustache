@@ -6,92 +6,99 @@ app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', './StaticFiles');
 
-var {{title}} = require('./../Models/{{title}}.js');
 
-app.get('/{{title}}/inserir', function(req, res) {
-    res.render('form', {
-        properties : Object.keys(new {{title}}()).map(key => {
-                return {
-                    name: key
-                };
-            })
-    });
-});
+{{#properties}}
 
-app.get('/{{title}}/detalhe/:id', function(req, res) {
-    {{title}}.get(req.params.id, function(row) {
-        res.render('details', {
-            properties : Object.getOwnPropertyNames(row).map(key => {
-                return {
-                    name : key,
-                    value : row[key]
-                }
-            })
-        });
-    });
-});
+//{{title}}s
 
-app.get('/{{title}}/editar/:id', function(req, res) {
-    {{title}}.get(req.params.id, function(row) {
+    var {{title}} = require('./../Models/{{title}}.js');
+
+    app.get('/{{title}}/inserir', function(req, res) {
         res.render('form', {
-            properties : Object.getOwnPropertyNames(row).map(key => {
-                return {
-                    name : key,
-                    value : row[key]
-                }
-            })
+            properties : Object.keys(new {{title}}()).map(key => {
+                    return {
+                        name: key
+                    };
+                })
         });
     });
-});
 
-app.get('/{{title}}', function (req, res) {
-    {{title}}.all(function (rows) {
-        res.render('list', {
-            title: '{{title}}',
-            rows: rows.map(obj => {
-                return {
-                    properties: Object.keys(obj).map(key => {
-                        return {
-                            name: key,
-                            value: obj[key]
-                        }
-                    }),
-                    actions: [{
-                        label: '',
-                        link: './{{title}}/Detalhe/' + obj.id,
-                        image: {
-                            src: '../images/read.png'
-                        },
-                        tooltip: 'Detalhe'
-                    }, {
-                        label: '',
-                        link: './{{title}}/Editar/' + obj.id,
-                        image: {
-                            src: '../images/edit.png'
-                        },
-                        tooltip: 'Editar'
-                    }, {
-                        label: '',
-                        link: '#',
-                        image: {
-                            src: '../images/delete.png'
-                        },
-                        tooltip: 'Apagar',
-                        events: [{
-                            name: "onclick",
-                            function: "apagar",
-                            args: obj.id
+    app.get('/{{title}}/detalhe/:id', function(req, res) {
+        {{title}}.get(req.params.id, function(row) {
+            res.render('details', {
+                properties : Object.getOwnPropertyNames(row).map(key => {
+                    return {
+                        name : key,
+                        value : row[key]
+                    }
+                })
+            });
+        });
+    });
+
+    app.get('/{{title}}/editar/:id', function(req, res) {
+        {{title}}.get(req.params.id, function(row) {
+            res.render('form', {
+                properties : Object.getOwnPropertyNames(row).map(key => {
+                    return {
+                        name : key,
+                        value : row[key]
+                    }
+                })
+            });
+        });
+    });
+
+    app.get('/{{title}}', function (req, res) {
+        {{title}}.all(function (rows) {
+            res.render('list', {
+                title: '{{title}}',
+                rows: rows.map(obj => {
+                    return {
+                        properties: Object.keys(obj).map(key => {
+                            return {
+                                name: key,
+                                value: obj[key]
+                            }
+                        }),
+                        actions: [{
+                            label: '',
+                            link: './{{title}}/Detalhe/' + obj.id,
+                            image: {
+                                src: '../images/read.png'
+                            },
+                            tooltip: 'Detalhe'
+                        }, {
+                            label: '',
+                            link: './{{title}}/Editar/' + obj.id,
+                            image: {
+                                src: '../images/edit.png'
+                            },
+                            tooltip: 'Editar'
+                        }, {
+                            label: '',
+                            link: '#',
+                            image: {
+                                src: '../images/delete.png'
+                            },
+                            tooltip: 'Apagar',
+                            events: [{
+                                name: "onclick",
+                                function: "apagar",
+                                args: obj.id
+                            }]
+
                         }]
-
-                    }]
-                }
-            }),
-            columns: Object.keys(new {{title}}()).map(key => {
-                return {
-                    name: key
-                };
-            })
+                    }
+                }),
+                columns: Object.keys(new {{title}}()).map(key => {
+                    return {
+                        name: key
+                    };
+                })
+            });
         });
     });
-});
+{{/properties}}
+
 module.exports = app;
