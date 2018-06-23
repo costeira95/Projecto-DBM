@@ -11,6 +11,9 @@ app.set('views', './StaticFiles');
 //categorias
 
     var categoria = require('./../Models/categoria.js');
+    var categoriaschema = require('./../../Models/Schemas/categoria.js');
+
+    //get inserir categorias
 
     app.get('/categoria/inserir', function(req, res) {
         res.render('form', {
@@ -22,18 +25,44 @@ app.set('views', './StaticFiles');
         });
     });
 
-    app.get('/categoria/detalhe/:id', function(req, res) {
-        categoria.get(req.params.id, function(row) {
-            res.render('details', {
-                properties : Object.getOwnPropertyNames(row).map(key => {
-                    return {
-                        name : key,
-                        value : row[key]
-                    }
-                })
-            });
-        });
-    });
+    //get detalhes categorias
+
+    app.get('/categoria/detalhe/:id', function (req, res) {
+	categoria.get(req.params.id, function (row) {
+		res.render('details', {
+		properties: function () {
+			var allProps = Object.getOwnPropertyNames(row);
+			var validProps = [];
+			allProps.forEach(function (prop) {
+				if (categoriaschema.properties.hasOwnProperty(prop)) {
+					validProps.push({
+                        name: prop,
+                        value: row[prop]
+					});
+				}
+			});
+				return validProps;
+		},
+			references: function () {
+				var allRefs = [];
+				if (categoriaschema.references) {
+				categoriaschema.references.forEach(function (ref) {
+					allRefs.push({
+						label: ref.label,
+						model: ref.model,
+						values: ref.relation == "M-M" ? req.params.id + '/' + ref.model :
+						row[(ref.model + "_id").toLowerCase()]
+					});
+				});
+			}
+				return allRefs;
+			},
+			get hasReferences() {
+				return this.references().length > 0;
+			}
+		})
+	});
+});
 
     app.get('/categoria/editar/:id', function(req, res) {
         categoria.get(req.params.id, function(row) {
@@ -102,6 +131,9 @@ app.set('views', './StaticFiles');
 //marcas
 
     var marca = require('./../Models/marca.js');
+    var marcaschema = require('./../../Models/Schemas/marca.js');
+
+    //get inserir marcas
 
     app.get('/marca/inserir', function(req, res) {
         res.render('form', {
@@ -113,18 +145,44 @@ app.set('views', './StaticFiles');
         });
     });
 
-    app.get('/marca/detalhe/:id', function(req, res) {
-        marca.get(req.params.id, function(row) {
-            res.render('details', {
-                properties : Object.getOwnPropertyNames(row).map(key => {
-                    return {
-                        name : key,
-                        value : row[key]
-                    }
-                })
-            });
-        });
-    });
+    //get detalhes marcas
+
+    app.get('/marca/detalhe/:id', function (req, res) {
+	marca.get(req.params.id, function (row) {
+		res.render('details', {
+		properties: function () {
+			var allProps = Object.getOwnPropertyNames(row);
+			var validProps = [];
+			allProps.forEach(function (prop) {
+				if (marcaschema.properties.hasOwnProperty(prop)) {
+					validProps.push({
+                        name: prop,
+                        value: row[prop]
+					});
+				}
+			});
+				return validProps;
+		},
+			references: function () {
+				var allRefs = [];
+				if (marcaschema.references) {
+				marcaschema.references.forEach(function (ref) {
+					allRefs.push({
+						label: ref.label,
+						model: ref.model,
+						values: ref.relation == "M-M" ? req.params.id + '/' + ref.model :
+						row[(ref.model + "_id").toLowerCase()]
+					});
+				});
+			}
+				return allRefs;
+			},
+			get hasReferences() {
+				return this.references().length > 0;
+			}
+		})
+	});
+});
 
     app.get('/marca/editar/:id', function(req, res) {
         marca.get(req.params.id, function(row) {
@@ -193,6 +251,9 @@ app.set('views', './StaticFiles');
 //produtos
 
     var produto = require('./../Models/produto.js');
+    var produtoschema = require('./../../Models/Schemas/produto.js');
+
+    //get inserir produtos
 
     app.get('/produto/inserir', function(req, res) {
         res.render('form', {
@@ -204,18 +265,44 @@ app.set('views', './StaticFiles');
         });
     });
 
-    app.get('/produto/detalhe/:id', function(req, res) {
-        produto.get(req.params.id, function(row) {
-            res.render('details', {
-                properties : Object.getOwnPropertyNames(row).map(key => {
-                    return {
-                        name : key,
-                        value : row[key]
-                    }
-                })
-            });
-        });
-    });
+    //get detalhes produtos
+
+    app.get('/produto/detalhe/:id', function (req, res) {
+	produto.get(req.params.id, function (row) {
+		res.render('details', {
+		properties: function () {
+			var allProps = Object.getOwnPropertyNames(row);
+			var validProps = [];
+			allProps.forEach(function (prop) {
+				if (produtoschema.properties.hasOwnProperty(prop)) {
+					validProps.push({
+                        name: prop,
+                        value: row[prop]
+					});
+				}
+			});
+				return validProps;
+		},
+			references: function () {
+				var allRefs = [];
+				if (produtoschema.references) {
+				produtoschema.references.forEach(function (ref) {
+					allRefs.push({
+						label: ref.label,
+						model: ref.model,
+						values: ref.relation == "M-M" ? req.params.id + '/' + ref.model :
+						row[(ref.model + "_id").toLowerCase()]
+					});
+				});
+			}
+				return allRefs;
+			},
+			get hasReferences() {
+				return this.references().length > 0;
+			}
+		})
+	});
+});
 
     app.get('/produto/editar/:id', function(req, res) {
         produto.get(req.params.id, function(row) {

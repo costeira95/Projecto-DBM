@@ -19,11 +19,11 @@ function produto (nome,descricao,preco,stock,categoria,marca) {
 
 produto.all = function (callback) {
     //fazer a chamada à função all do database
-    database.all("SELECT * FROM produtos", this, callback);
+    database.all("SELECT produtos.*, marcas.nome as marca,categorias.nome as categoria FROM produtos INNER JOIN marcas on marcas.marca_id = produtos.marca_id INNER JOIN categorias on categorias.categoria_id = produtos.categoria_id ", this, callback);
 }
 
 produto.get = function (id, callback) {
-     database.get("SELECT * FROM produtos WHERE produto_id = " + id, [], this, callback);
+     database.get("SELECT produtos.*, marcas.nome as marca,categorias.nome as categoria FROM produtos INNER JOIN marcas on marcas.marca_id = produtos.marca_id INNER JOIN categorias on categorias.categoria_id = produtos.categoria_id  WHERE produto_id = " + id, [], this, callback);
 }
 
 produto.prototype.save = function (callback) {
@@ -39,10 +39,6 @@ produto.prototype.save = function (callback) {
 produto.delete = function (id, callback) {
 //fazer a chamada à função run do database para apagar o registo
 database.run("DELETE FROM produtos WHERE produto_id = " + id, [], callback);
-}
-
-produto.many = function (model, id, callback) {
-    database.where(`SELECT produto.* FROM produto INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = produto.${model.toLowerCase()}_id WHERE produto.${model.toLowerCase()}_id=` +id, [], this,  callback);
 }
 
 produto.mappingDBtoObject = {

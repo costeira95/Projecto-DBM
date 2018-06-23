@@ -3,19 +3,16 @@ var Categoria = require('./Publish/Models/categoria.js');
 var Produto = require('./Publish/Models/produto.js');
 
 
-var cat = Categoria.get(1, log);
-var marca = Marca.get(1, log);
-
-var m = new Marca("asdasdasd");
+var m = new Marca("Marca 1");
 m.save(log);
 
-var c = new Categoria("teste");
+var c = new Categoria("Categoria 1");
 c.save(log);
 
 //Marca.all(log);
 //Marca.delete(2, log);
 
-var produto = new Produto("teste", "teste", 20, 2, c, m);
+var produto = new Produto("Produto 1", "desc produto 1", 20, 2, c, m);
 produto.save(log);
 
 Produto.get(1, log);

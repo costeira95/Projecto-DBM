@@ -57,10 +57,12 @@ module.exports = {
     ],
     "references": [
         {
+            "label": "marca",
             "model": "marca",
             "relation": "1-M"
         },
         {
+            "label": "categoria",
             "model": "categoria",
             "relation": "1-M"
         }

@@ -29,6 +29,26 @@ function generate(schema){
             return schema.properties[key];
         });
     },
+    references: function () {
+        var allRefs = "";
+        if (schema.references) {
+        schema.references.forEach(function (ref) {
+            allRefs += "INNER JOIN " + ref.model + "s on " + ref.model + "s." + ref.model + "_id = " + schema.title + "s." + ref.model + "_id "
+        });
+    }
+        return allRefs;
+    },
+    outros: function () {
+        var allRefs = "";
+        if (schema.references) {
+            allRefs+=", ";
+        schema.references.forEach(function (ref) {
+            allRefs += ref.model + "s.nome as " + ref.model + ",";
+        });
+        allRefs = allRefs.substring(0, allRefs.length - 1);
+    }
+        return allRefs;
+    },
     get propertiesJoin() { //criar um array com os nomes das propriedades e fazer o join para separar por ,
         return this.properties().map(obj => {
             return obj.name

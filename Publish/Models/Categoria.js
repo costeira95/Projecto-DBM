@@ -9,11 +9,11 @@ function categoria (nome) {
 
 categoria.all = function (callback) {
     //fazer a chamada à função all do database
-    database.all("SELECT * FROM categorias", this, callback);
+    database.all("SELECT categorias.* FROM categorias ", this, callback);
 }
 
 categoria.get = function (id, callback) {
-     database.get("SELECT * FROM categorias WHERE categoria_id = " + id, [], this, callback);
+     database.get("SELECT categorias.* FROM categorias  WHERE categoria_id = " + id, [], this, callback);
 }
 
 categoria.prototype.save = function (callback) {
@@ -29,10 +29,6 @@ categoria.prototype.save = function (callback) {
 categoria.delete = function (id, callback) {
 //fazer a chamada à função run do database para apagar o registo
 database.run("DELETE FROM categorias WHERE categoria_id = " + id, [], callback);
-}
-
-categoria.many = function (model, id, callback) {
-    database.where(`SELECT categoria.* FROM categoria INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = categoria.${model.toLowerCase()}_id WHERE categoria.${model.toLowerCase()}_id=` +id, [], this,  callback);
 }
 
 categoria.mappingDBtoObject = {

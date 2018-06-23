@@ -9,11 +9,11 @@ function marca (nome) {
 
 marca.all = function (callback) {
     //fazer a chamada à função all do database
-    database.all("SELECT * FROM marcas", this, callback);
+    database.all("SELECT marcas.* FROM marcas ", this, callback);
 }
 
 marca.get = function (id, callback) {
-     database.get("SELECT * FROM marcas WHERE marca_id = " + id, [], this, callback);
+     database.get("SELECT marcas.* FROM marcas  WHERE marca_id = " + id, [], this, callback);
 }
 
 marca.prototype.save = function (callback) {
@@ -29,10 +29,6 @@ marca.prototype.save = function (callback) {
 marca.delete = function (id, callback) {
 //fazer a chamada à função run do database para apagar o registo
 database.run("DELETE FROM marcas WHERE marca_id = " + id, [], callback);
-}
-
-marca.many = function (model, id, callback) {
-    database.where(`SELECT marca.* FROM marca INNER JOIN ${model}s ON ${model}s.${model.toLowerCase()}_id = marca.${model.toLowerCase()}_id WHERE marca.${model.toLowerCase()}_id=` +id, [], this,  callback);
 }
 
 marca.mappingDBtoObject = {

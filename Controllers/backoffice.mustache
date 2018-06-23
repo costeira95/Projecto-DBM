@@ -12,6 +12,9 @@ app.set('views', './StaticFiles');
 //{{title}}s
 
     var {{title}} = require('./../Models/{{title}}.js');
+    var {{title}}schema = require('./../../Models/Schemas/{{title}}.js');
+
+    //get inserir {{title}}s
 
     app.get('/{{title}}/inserir', function(req, res) {
         res.render('form', {
@@ -23,18 +26,44 @@ app.set('views', './StaticFiles');
         });
     });
 
-    app.get('/{{title}}/detalhe/:id', function(req, res) {
-        {{title}}.get(req.params.id, function(row) {
-            res.render('details', {
-                properties : Object.getOwnPropertyNames(row).map(key => {
-                    return {
-                        name : key,
-                        value : row[key]
-                    }
-                })
-            });
-        });
-    });
+    //get detalhes {{title}}s
+
+    app.get('/{{title}}/detalhe/:id', function (req, res) {
+	{{title}}.get(req.params.id, function (row) {
+		res.render('details', {
+		properties: function () {
+			var allProps = Object.getOwnPropertyNames(row);
+			var validProps = [];
+			allProps.forEach(function (prop) {
+				if ({{title}}schema.properties.hasOwnProperty(prop)) {
+					validProps.push({
+                        name: prop,
+                        value: row[prop]
+					});
+				}
+			});
+				return validProps;
+		},
+			references: function () {
+				var allRefs = [];
+				if ({{title}}schema.references) {
+				{{title}}schema.references.forEach(function (ref) {
+					allRefs.push({
+						label: ref.label,
+						model: ref.model,
+						values: ref.relation == "M-M" ? req.params.id + '/' + ref.model :
+						row[(ref.model + "_id").toLowerCase()]
+					});
+				});
+			}
+				return allRefs;
+			},
+			get hasReferences() {
+				return this.references().length > 0;
+			}
+		})
+	});
+});
 
     app.get('/{{title}}/editar/:id', function(req, res) {
         {{title}}.get(req.params.id, function(row) {

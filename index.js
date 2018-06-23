@@ -51,7 +51,7 @@ function gerarApi(req, res) {
   res.sendStatus(200);
 }
 
-function gerarBackOffice(req, res) {
+function gerarBackOffice(req, res) {  
   backoffice_generate.generate({schema_categoria, schema_marca, schema_produto});
   
   res.sendStatus(200);
