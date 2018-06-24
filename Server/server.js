@@ -54,6 +54,7 @@ function gerarBd(){
   var schemas = [];
 
   config.models.forEach(model => {
+    if(model.path != null)
       schemas.push(require(model.path));
   })
 

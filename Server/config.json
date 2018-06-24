@@ -3,19 +3,23 @@
   "dbname": "projeto_dbm.db",
   "models": [
     {
+      "name": "Home",
+      "href": "./"
+    },
+    {
       "name": "categoria",
       "path": "./../Models/Schemas/categoria.js",
-      "href": "./categoria"
+      "href": "./backoffice/categoria"
     },
     {
       "name": "marca",
       "path": "./../Models/Schemas/marca.js",
-      "href": "./marca"
+      "href": "./backoffice/marca"
     },
     {
       "name": "produto",
       "path": "./../Models/Schemas/produto.js",
-      "href": "./produto"
+      "href": "./backoffice/produto"
     }
   ],
 
