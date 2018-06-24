@@ -33,6 +33,14 @@ function {{title}} ({{propertiesJoin}}) {
 database.run("DELETE FROM {{table}} WHERE {{title}}_id = " + id, [], callback);
 }
 
+{{title}}.top = function (property,order,limit,callback) {
+    var dbprop = Object.keys({{title}}.mappingDBtoObject).find(key => {{title}}.mappingDBtoObject[key] ==
+    property);
+    database.where(`SELECT * FROM {{title}}s ORDER BY ${dbprop} ${order} LIMIT ?`, [limit], {{title}},
+    callback);
+}
+
+
 {{title}}.mappingDBtoObject = {
     {{{mappingDBtoObject}}}
 }

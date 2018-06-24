@@ -21,7 +21,7 @@ app.post("/gerarPastas", gerarPastas);
 app.post("/gerarClasses", gerarClasses);
 app.post("/gerarBd", gerarBd);
 app.post("/gerarApi", gerarApi);
-app.post("/gerarFrontOffice", frontoffice_generate.generate);
+app.post("/gerarFrontOffice", gerarFrontOffice);
 app.post("/gerarBackOffice",gerarBackOffice );
 
 
@@ -53,6 +53,12 @@ function gerarApi(req, res) {
 
 function gerarBackOffice(req, res) {  
   backoffice_generate.generate({schema_categoria, schema_marca, schema_produto});
+  
+  res.sendStatus(200);
+}
+
+function gerarFrontOffice(req, res) {  
+  frontoffice_generate.generate({schema_produto});
   
   res.sendStatus(200);
 }

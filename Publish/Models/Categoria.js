@@ -31,6 +31,14 @@ categoria.delete = function (id, callback) {
 database.run("DELETE FROM categorias WHERE categoria_id = " + id, [], callback);
 }
 
+categoria.top = function (property,order,limit,callback) {
+    var dbprop = Object.keys(categoria.mappingDBtoObject).find(key => categoria.mappingDBtoObject[key] ==
+    property);
+    database.where(`SELECT * FROM categorias ORDER BY ${dbprop} ${order} LIMIT ?`, [limit], categoria,
+    callback);
+}
+
+
 categoria.mappingDBtoObject = {
     nome:'nome',categoria_id:'id'
 }

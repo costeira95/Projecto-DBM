@@ -4,17 +4,28 @@
   "models": [
     {
       "name": "categoria",
-      "path": "./../Models/Schemas/categoria.js"
+      "path": "./../Models/Schemas/categoria.js",
+      "href": "./categoria"
     },
     {
       "name": "marca",
-      "path": "./../Models/Schemas/marca.js"
+      "path": "./../Models/Schemas/marca.js",
+      "href": "./marca"
     },
     {
       "name": "produto",
-      "path": "./../Models/Schemas/produto.js"
+      "path": "./../Models/Schemas/produto.js",
+      "href": "./produto"
     }
   ],
+
+  "frontoffice": {
+    "model": "produto",
+    "property": "nome",
+    "order": "DESC",
+    "limit": 3
+  },
+    
   "modules": {
     "express": true
   }

@@ -41,6 +41,14 @@ produto.delete = function (id, callback) {
 database.run("DELETE FROM produtos WHERE produto_id = " + id, [], callback);
 }
 
+produto.top = function (property,order,limit,callback) {
+    var dbprop = Object.keys(produto.mappingDBtoObject).find(key => produto.mappingDBtoObject[key] ==
+    property);
+    database.where(`SELECT * FROM produtos ORDER BY ${dbprop} ${order} LIMIT ?`, [limit], produto,
+    callback);
+}
+
+
 produto.mappingDBtoObject = {
     nome:'nome',descricao:'descricao',preco:'preco',stock:'stock',categoria:'categoria',marca:'marca',produto_id:'id'
 }

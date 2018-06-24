@@ -31,6 +31,14 @@ marca.delete = function (id, callback) {
 database.run("DELETE FROM marcas WHERE marca_id = " + id, [], callback);
 }
 
+marca.top = function (property,order,limit,callback) {
+    var dbprop = Object.keys(marca.mappingDBtoObject).find(key => marca.mappingDBtoObject[key] ==
+    property);
+    database.where(`SELECT * FROM marcas ORDER BY ${dbprop} ${order} LIMIT ?`, [limit], marca,
+    callback);
+}
+
+
 marca.mappingDBtoObject = {
     nome:'nome',marca_id:'id'
 }
