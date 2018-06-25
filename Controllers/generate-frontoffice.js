@@ -3,7 +3,9 @@ var fs = require("fs");
 
 var template = fs.readFileSync("./Controllers/frontoffice.mustache").toString();
 var config = JSON.parse(fs.readFileSync("./Server/config.json"));
-
+/**********************************
+ * Função para gerar a frontoffice
+ */
 function generate() {
     var view = {
       properties: config.frontoffice,

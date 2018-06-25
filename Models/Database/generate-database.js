@@ -3,7 +3,10 @@ var fs = require("fs");
 var mustache = require("mustache");
 
 var db;
-
+/*****************************************************
+ * Função para gerar as colunas na base de dados
+ * através dos schemas
+ */
 function generate(db_name, schemas) {
   var db = new sqlite3.Database("./Publish/Database/" + db_name, () => {
     var query_template = fs

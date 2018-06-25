@@ -69,7 +69,6 @@ app.get('/', function (req, res) {
 
     var categoria = require('./../Models/categoria.js');
     var categoriaschema = require('./../../Models/Schemas/categoria.js');
-    var categoriaschema = require('./../../Models/Schemas/categoria.js');
     var props = categoriaschema.properties;
 
     //get inserir categorias
@@ -225,7 +224,6 @@ app.get('/', function (req, res) {
 
     var marca = require('./../Models/marca.js');
     var marcaschema = require('./../../Models/Schemas/marca.js');
-    var marcaschema = require('./../../Models/Schemas/marca.js');
     var props = marcaschema.properties;
 
     //get inserir marcas
@@ -380,7 +378,6 @@ app.get('/', function (req, res) {
 //produtos
 
     var produto = require('./../Models/produto.js');
-    var produtoschema = require('./../../Models/Schemas/produto.js');
     var produtoschema = require('./../../Models/Schemas/produto.js');
     var props = produtoschema.properties;
 

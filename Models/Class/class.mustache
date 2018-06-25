@@ -1,5 +1,8 @@
 var database = require('../../sqlite.js')('./Publish/Database/{{dbname}}');
-
+/************************************************
+*   Criação da class {{title}},
+*    propriedades: {{propertiesJoin}}
+*/
 function {{title}} ({{propertiesJoin}}) {
     this.id = 0;
     {{#properties}}
@@ -9,15 +12,25 @@ function {{title}} ({{propertiesJoin}}) {
         Object.defineProperty(this,'{{primaryKey.name}}',{ enumerable:false});
 }
 
+/************************************************
+*   Obter todos os dados da base de dados
+*/
 {{title}}.all = function (callback) {
     //fazer a chamada à função all do database
     database.all("SELECT {{title}}s.*{{{outros}}} FROM {{table}} {{{references}}}", this, callback);
 }
 
+/************************************************
+*   Obter dados de um determinado dado
+*   da base de dados
+*/
 {{title}}.get = function (id, callback) {
      database.get("SELECT {{title}}s.*{{{outros}}} FROM {{table}} {{{references}}} WHERE {{title}}_id = " + id, [], this, callback);
 }
 
+/************************************************
+*   Gravar dados na base de dados
+*/
 {{title}}.prototype.save = function (callback) {
     if(this.{{primaryKey.name}}) { //Se existir valor no id será para update
         //fazer a chamada à função run do database para atualizar o registo
@@ -28,11 +41,17 @@ function {{title}} ({{propertiesJoin}}) {
     }
 }
 
+/************************************************
+*   Eliminar um dado na base de dados
+*/
 {{title}}.delete = function (id, callback) {
 //fazer a chamada à função run do database para apagar o registo
 database.run("DELETE FROM {{table}} WHERE {{title}}_id = " + id, [], callback);
 }
 
+/************************************************
+*   Ordena os  e limita
+*/
 {{title}}.top = function (property,order,limit,callback) {
     var dbprop = Object.keys({{title}}.mappingDBtoObject).find(key => {{title}}.mappingDBtoObject[key] ==
     property);
@@ -40,7 +59,9 @@ database.run("DELETE FROM {{table}} WHERE {{title}}_id = " + id, [], callback);
     callback);
 }
 
-
+/************************************************
+*   Mapea os dados para objectos
+*/
 {{title}}.mappingDBtoObject = {
     {{{mappingDBtoObject}}}
 }

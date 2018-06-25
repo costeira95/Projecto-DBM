@@ -2,7 +2,9 @@ var mustache = require("mustache");
 var fs = require("fs");
 
 var template = fs.readFileSync("./Controllers/api.mustache").toString();
-
+/**********************************
+ * Função para gerar a api
+ */
 function generate(schemas){
     var view = {
       properties: function () {

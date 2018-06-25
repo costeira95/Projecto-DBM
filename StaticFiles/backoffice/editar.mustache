@@ -8,7 +8,8 @@
     <title>Projeto DBM</title>
     {{>css}}
     
-    <script>        
+    <script>
+        /** Função para editar o objecto na base de dados através da api */        
         function editar() {
           {{#properties}}
           var {{name}} = document.getElementById("{{name}}").value;

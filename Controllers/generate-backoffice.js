@@ -2,7 +2,9 @@ var mustache = require("mustache");
 var fs = require("fs");
 
 var template = fs.readFileSync("./Controllers/backoffice.mustache").toString();
-
+/*************************************
+ * Função para gerar a backoffice
+ */
 function generate(schemas){
     var view = {
       properties: function () {

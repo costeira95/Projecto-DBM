@@ -7,8 +7,8 @@
     <meta name="author" content="">
     <title>Projeto DBM</title>
     {{>css}}
-
     <script>
+    /** Criação de um ajax para obter o resultado de um determinado objecto e preeencher as labels com o respectivo valor */
     {{#hasReferences}}
         function loadValues(model,values,label,controlId,relatedModel){
             var xhr = new XMLHttpRequest();
@@ -42,7 +42,7 @@
       <h1 style="margin-top: -10px;">{{Titulo}}</h1>
       <h2>{{SubTitulo}}</h2>
       <br />
-
+    <!-- Criação de labels com o nome e o valor das propriedade -->
     {{#properties}}
         <div>
             <label>{{name}}:</label>

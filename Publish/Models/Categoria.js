@@ -1,5 +1,8 @@
 var database = require('../../sqlite.js')('./Publish/Database/projeto_dbm.db');
-
+/************************************************
+*   Criação da class categoria,
+*    propriedades: nome
+*/
 function categoria (nome) {
     this.id = 0;
         this.nome = nome;
@@ -7,15 +10,25 @@ function categoria (nome) {
         Object.defineProperty(this,'id',{ enumerable:false});
 }
 
+/************************************************
+*   Obter todos os dados da base de dados
+*/
 categoria.all = function (callback) {
     //fazer a chamada à função all do database
     database.all("SELECT categorias.* FROM categorias ", this, callback);
 }
 
+/************************************************
+*   Obter dados de um determinado dado
+*   da base de dados
+*/
 categoria.get = function (id, callback) {
      database.get("SELECT categorias.* FROM categorias  WHERE categoria_id = " + id, [], this, callback);
 }
 
+/************************************************
+*   Gravar dados na base de dados
+*/
 categoria.prototype.save = function (callback) {
     if(this.id) { //Se existir valor no id será para update
         //fazer a chamada à função run do database para atualizar o registo
@@ -26,11 +39,17 @@ categoria.prototype.save = function (callback) {
     }
 }
 
+/************************************************
+*   Eliminar um dado na base de dados
+*/
 categoria.delete = function (id, callback) {
 //fazer a chamada à função run do database para apagar o registo
 database.run("DELETE FROM categorias WHERE categoria_id = " + id, [], callback);
 }
 
+/************************************************
+*   Ordena os  e limita
+*/
 categoria.top = function (property,order,limit,callback) {
     var dbprop = Object.keys(categoria.mappingDBtoObject).find(key => categoria.mappingDBtoObject[key] ==
     property);
@@ -38,7 +57,9 @@ categoria.top = function (property,order,limit,callback) {
     callback);
 }
 
-
+/************************************************
+*   Mapea os dados para objectos
+*/
 categoria.mappingDBtoObject = {
     nome:'nome',categoria_id:'id'
 }
