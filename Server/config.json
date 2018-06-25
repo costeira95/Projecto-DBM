@@ -29,6 +29,41 @@
     "order": "DESC",
     "limit": 3
   },
+
+  "files" : [
+      {
+        "originalPath" : "./StaticFiles/delete.png",
+        "destinationPath" : "./Publish/Public/images/delete.png"
+      },
+      {
+        "originalPath" : "./StaticFiles/edit.png",
+        "destinationPath" : "./Publish/Public/images/edit.png"
+      },
+      {
+        "originalPath" : "./StaticFiles/read.png",
+        "destinationPath" : "./Publish/Public/images/read.png"
+      },
+      {
+        "originalPath" : "./StaticFiles/details.mustache",
+        "destinationPath" : "./Publish/Views/details.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/form.mustache",
+        "destinationPath" : "./Publish/Views/form.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/frontoffice.mustache",
+        "destinationPath" : "./Publish/Views/frontoffice.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/list.mustache",
+        "destinationPath" : "./Publish/Views/list.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/menu.mustache",
+        "destinationPath" : "./Publish/Views/menu.mustache"
+      }
+  ],
     
   "modules": {
     "express": true

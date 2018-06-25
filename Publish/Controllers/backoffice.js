@@ -4,7 +4,7 @@ var mustacheExpress = require('mustache-express');
 
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
-app.set('views', './StaticFiles');
+app.set('views', './Publish/Views');
 
 
 

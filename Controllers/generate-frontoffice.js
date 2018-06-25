@@ -10,6 +10,9 @@ function generate() {
     }
     var output = mustache.render(template, view);
     console.log(output);
+    config.files.forEach(key => {
+      fs.createReadStream(key["originalPath"]).pipe(fs.createWriteStream(key["destinationPath"])); 
+    });
     fs.writeFileSync("./Publish/Controllers/frontoffice.js", output);
 }
   

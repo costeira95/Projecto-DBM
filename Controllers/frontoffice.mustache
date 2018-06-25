@@ -5,7 +5,7 @@ var fs = require("fs");
 
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
-app.set('views', './StaticFiles');
+app.set('views', './Publish/Views');
 var config = JSON.parse(fs.readFileSync("./Server/config.json"));
 
 {{#properties}}

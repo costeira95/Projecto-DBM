@@ -1,0 +1,215 @@
+*{
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background: url("../images/bg1.jpg");
+	font-family: "Times New Roman", Times, serif;
+}
+
+a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+header {
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 10%;
+	text-align: center;
+	background-color: #2d2d2d;		
+	box-sizing: border-box;
+}
+
+#menu {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+#menu li {
+	display: inline-block;
+	font-weight: bold;
+	margin: 15px;
+	text-transform: uppercase;
+}
+
+#menu a {
+	color: #FFFFFF;
+}
+
+#menu a:hover, #menu .selected {
+	color: #4eaf4e;
+}
+
+#conteudo {
+	box-sizing: border-box;
+	padding: 20px;
+	background: rgba(255, 255, 255, 0.9);	
+	width: 100%;
+	height: 80%;
+	overflow-y: auto;
+}
+
+#home ul {
+	margin-top: 10px;
+}
+
+#conteudo h1 {
+  font-size: 20px;
+  padding: 5px;
+  border-bottom: 1px solid #2d2d2d;
+  margin-bottom: 10px;
+}
+
+#conteudo h2 {
+  font-size: 16px;
+  padding: 5px;
+}
+
+#conteudo table {
+	width:100%;
+	border-collapse: collapse;
+}
+
+#conteudo table:not(.jornada){
+	text-align: left;
+}
+
+#conteudo table th a {
+	color: #458dff;
+}
+
+#conteudo tr {
+	width:100%;
+	padding: 20px;
+}
+
+#conteudo tbody tr:nth-child(odd){
+	background: #cccccc;
+}
+
+#conteudo th, td {
+	padding: 5px;
+}
+
+#conteudo form {
+	padding: 5px;
+}
+
+#conteudo form label {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#conteudo form input, select, textarea {
+	margin-bottom: 10px;
+	min-width: 200px;
+}
+
+#controlos {
+	width: 100%;	
+	clear: both;
+}
+
+#controlos > a {
+	margin-top: 10px;
+	background: #4caf50;
+	padding: 7px 15px;
+	color: #ffffff;
+	text-align: center;
+	font-size: 12px;
+	margin-right: 5px;
+	float:left;
+}
+
+#controlos > a:hover {
+	color: #2d2d2d;
+}
+
+.cnt {
+	display: none;
+}
+
+
+#escolhaJogadores, #escolhaEquipas, #tabelaDetalhesLiga, #tabelaJornada, #tabelaDetalhesTaca {
+	float: left;
+	padding: 0 5px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+#escolhaJogadores, #escolhaEquipas {
+	border-top: 1px solid #2d2d2d;
+}
+
+#tabelaJornada table, #tabelaEliminatoria table {
+	text-align: center;
+}
+
+.jornada th{
+	color: #4caf50;
+}
+
+.visitado {
+	text-align: right;
+	width:40%;
+}
+
+.visitante {
+	text-align: left;
+	width:40%;
+}
+
+footer {
+	text-align: center;
+	width: 100%;
+	background-color: #2d2d2d;
+	padding: 15px 0;
+	height: 10%;
+	box-sizing: border-box;
+}
+
+footer p{
+	color: #FFFFFF;
+	font-size: 16px;
+}
+
+#menu, footer {
+	display: flex;
+    align-items: center;
+	justify-content: center;
+}
+
+@media only screen and (max-width: 500px){
+	table, #controlos > a { 
+		font-size: 2.2vw;
+	}
+
+	#conteudo h1 {
+		font-size: 14px;
+	}
+
+	#conteudo form label, #conteudo form select, #home {
+		font-size: 10px;
+	}
+	
+	#menu li {
+		margin: 5px;
+	}
+	
+	header {
+		font-size: 4vw;
+	}
+	
+	footer p {
+		font-size: 3vw;
+	}
+}
