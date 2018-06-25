@@ -70,6 +70,7 @@ app.get('/', function (req, res) {
 
     var {{title}} = require('./../Models/{{title}}.js');
     var {{title}}schema = require('./../../Models/Schemas/{{title}}.js');
+    var props = {{title}}schema.properties;
 
     //get inserir {{title}}s
 
@@ -80,8 +81,16 @@ app.get('/', function (req, res) {
             retroceder : "../",
             Titulo: "Inserir {{title}}",
             properties : Object.keys(new {{title}}()).map(key => {
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var collumn = props[key];
+                var min = ((collumn.minimum != void 0 ) ? "min='"+collumn.minimum+"'": "");
+                var max = ((collumn.maximum != void 0 ) ? "max='"+collumn.maximum+"'" : "");
                     return {
-                        name: key
+                        name: key,
+                        required: req,
+                        minLenght: min,
+                        maxLenght: max
                     };
                 }),
             references: function () {

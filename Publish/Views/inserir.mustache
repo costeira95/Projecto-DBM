@@ -45,16 +45,16 @@
       {{#properties}}
       <div class="form-group">
             <label for="input">{{name}}</label>
-            <input type="text" class="form-control" id="{{name}}" name="{{name}}">
+            <input type="text" class="form-control" id="{{name}}" name="{{name}}" {{{minLenght}}} {{{maxLenght}}} {{required}}>
         </div>
         {{/properties}}
         {{#references}}
       <div class="form-group">
             <label for="input">{{model}}</label>
-            <input type="text" class="form-control" id="{{model}}" name="{{model}}">
+            <input type="text" class="form-control" id="{{model}}" name="{{model}}" {{{minLenght}}} {{{maxLenght}}} {{required}}>
         </div>
         {{/references}}
-        <button onclick="inserir()">Inserir</button>
+        <button class="button" onclick="inserir()">Inserir</button>
         <a href="../{{title}}s">Voltar</a>
       
       

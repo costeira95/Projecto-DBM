@@ -28,7 +28,9 @@ module.exports = {
     "properties": {
         "nome": {
             "description": "Nome do Produto",
-            "type": "string"
+            "type": "string",
+            "minimum": 9,
+            "maximum": 20
         },
         "descricao": {
             "description": "Descrição do Produto",

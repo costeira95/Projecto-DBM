@@ -69,6 +69,8 @@ app.get('/', function (req, res) {
 
     var categoria = require('./../Models/categoria.js');
     var categoriaschema = require('./../../Models/Schemas/categoria.js');
+    var categoriaschema = require('./../../Models/Schemas/categoria.js');
+    var props = categoriaschema.properties;
 
     //get inserir categorias
 
@@ -79,8 +81,16 @@ app.get('/', function (req, res) {
             retroceder : "../",
             Titulo: "Inserir categoria",
             properties : Object.keys(new categoria()).map(key => {
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var collumn = props[key];
+                var min = ((collumn.minimum != void 0 ) ? "min='"+collumn.minimum+"'": "");
+                var max = ((collumn.maximum != void 0 ) ? "max='"+collumn.maximum+"'" : "");
                     return {
-                        name: key
+                        name: key,
+                        required: req,
+                        minLenght: min,
+                        maxLenght: max
                     };
                 }),
             references: function () {
@@ -215,6 +225,8 @@ app.get('/', function (req, res) {
 
     var marca = require('./../Models/marca.js');
     var marcaschema = require('./../../Models/Schemas/marca.js');
+    var marcaschema = require('./../../Models/Schemas/marca.js');
+    var props = marcaschema.properties;
 
     //get inserir marcas
 
@@ -225,8 +237,16 @@ app.get('/', function (req, res) {
             retroceder : "../",
             Titulo: "Inserir marca",
             properties : Object.keys(new marca()).map(key => {
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var collumn = props[key];
+                var min = ((collumn.minimum != void 0 ) ? "min='"+collumn.minimum+"'": "");
+                var max = ((collumn.maximum != void 0 ) ? "max='"+collumn.maximum+"'" : "");
                     return {
-                        name: key
+                        name: key,
+                        required: req,
+                        minLenght: min,
+                        maxLenght: max
                     };
                 }),
             references: function () {
@@ -361,6 +381,8 @@ app.get('/', function (req, res) {
 
     var produto = require('./../Models/produto.js');
     var produtoschema = require('./../../Models/Schemas/produto.js');
+    var produtoschema = require('./../../Models/Schemas/produto.js');
+    var props = produtoschema.properties;
 
     //get inserir produtos
 
@@ -371,8 +393,16 @@ app.get('/', function (req, res) {
             retroceder : "../",
             Titulo: "Inserir produto",
             properties : Object.keys(new produto()).map(key => {
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var req = (produtoschema.required.includes(key) ? "required" : "");
+                var collumn = props[key];
+                var min = ((collumn.minimum != void 0 ) ? "min='"+collumn.minimum+"'": "");
+                var max = ((collumn.maximum != void 0 ) ? "max='"+collumn.maximum+"'" : "");
                     return {
-                        name: key
+                        name: key,
+                        required: req,
+                        minLenght: min,
+                        maxLenght: max
                     };
                 }),
             references: function () {
