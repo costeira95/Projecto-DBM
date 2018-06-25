@@ -13,6 +13,7 @@ var frontoffice_routes = require('./Controllers/frontoffice.js');
 var backoffice_routes = require('./Controllers/backoffice.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/Public'));
 app.use('/api', api_routes);
 app.use('/', frontoffice_routes);
 app.use('/backoffice', backoffice_routes);

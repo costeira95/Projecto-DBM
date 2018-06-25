@@ -4,64 +4,95 @@
   "models": [
     {
       "name": "Home",
-      "href": "./"
+      "FrontOfficeHref": "./",
+      "BackOfficeHref": "./"
     },
     {
-      "name": "categoria",
+      "name": "Categorias",
       "path": "./../Models/Schemas/categoria.js",
-      "href": "./backoffice/categoria"
+      "FrontOfficeHref": "./categorias",
+      "BackOfficeHref": "./backoffice/produto"
     },
     {
-      "name": "marca",
+      "name": "Marcas",
       "path": "./../Models/Schemas/marca.js",
-      "href": "./backoffice/marca"
+      "FrontOfficeHref": "./Marcas",
+      "BackOfficeHref": "./backoffice/produto"
     },
     {
-      "name": "produto",
+      "name": "Produtos",
       "path": "./../Models/Schemas/produto.js",
-      "href": "./backoffice/produto"
+      "FrontOfficeHref": "./",
+      "BackOfficeHref": "./backoffice/produto"
     }
   ],
 
-  "frontoffice": {
-    "model": "produto",
-    "property": "nome",
-    "order": "DESC",
-    "limit": 3
-  },
+  "frontoffice": [
+    {
+      "model": "produto",
+      "property": "nome",
+      "order": "DESC",
+      "limit": 3
+    },
+
+    {
+      "model": "marca",
+      "property": "nome",
+      "order": "DESC",
+      "limit": 3
+    },
+    {
+      "model": "categoria",
+      "property": "nome",
+      "order": "DESC",
+      "limit": 3
+    }
+],
 
   "files" : [
       {
-        "originalPath" : "./StaticFiles/delete.png",
+        "originalPath" : "./StaticFiles/backoffice/delete.png",
         "destinationPath" : "./Publish/Public/images/delete.png"
       },
       {
-        "originalPath" : "./StaticFiles/edit.png",
+        "originalPath" : "./StaticFiles/backoffice/edit.png",
         "destinationPath" : "./Publish/Public/images/edit.png"
       },
       {
-        "originalPath" : "./StaticFiles/read.png",
+        "originalPath" : "./StaticFiles/backoffice/read.png",
         "destinationPath" : "./Publish/Public/images/read.png"
       },
       {
-        "originalPath" : "./StaticFiles/details.mustache",
+        "originalPath" : "./StaticFiles/backoffice/details.mustache",
         "destinationPath" : "./Publish/Views/details.mustache"
       },
       {
-        "originalPath" : "./StaticFiles/form.mustache",
+        "originalPath" : "./StaticFiles/backoffice/form.mustache",
         "destinationPath" : "./Publish/Views/form.mustache"
       },
       {
-        "originalPath" : "./StaticFiles/frontoffice.mustache",
+        "originalPath" : "./StaticFiles/frontoffice/frontoffice.mustache",
         "destinationPath" : "./Publish/Views/frontoffice.mustache"
       },
       {
-        "originalPath" : "./StaticFiles/list.mustache",
+        "originalPath" : "./StaticFiles/backoffice/list.mustache",
         "destinationPath" : "./Publish/Views/list.mustache"
       },
       {
-        "originalPath" : "./StaticFiles/menu.mustache",
+        "originalPath" : "./StaticFiles/common/menu.mustache",
         "destinationPath" : "./Publish/Views/menu.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/bootstrap/bootstrap.min.css",
+        "destinationPath" : "./Publish/Public/css/bootstrap.min.css"
+      },
+      {
+        "originalPath" : "./StaticFiles/bootstrap/bootstrap.bundle.min.js",
+        "destinationPath" : "./Publish/Public/js/bootstrap.bundle.min.js"
+      },
+      {
+        "originalPath" : "./StaticFiles/bootstrap/jquery.min.js",
+        "destinationPath" : "./Publish/Public/js/jquery.min.js"
       }
   ],
     

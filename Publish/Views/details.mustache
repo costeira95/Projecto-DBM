@@ -4,7 +4,7 @@
     {{#hasReferences}}
         function loadValues(model,values,label,controlId,relatedModel){
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", `../../api/${model}/${values}`, true);
+            xhr.open("GET", `./api/${model}/${values}`, true);
             xhr.onreadystatechange = function () {
             if(xhr.readyState === 4 && xhr.status === 200) {
                 var control = document.getElementById(controlId);

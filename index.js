@@ -58,12 +58,12 @@ function gerarBackOffice(req, res) {
 }
 
 function gerarFrontOffice(req, res) {  
-  frontoffice_generate.generate({schema_produto});
+  frontoffice_generate.generate();
   
   res.sendStatus(200);
 }
 
-var server = app.listen(5000, function() {
+var server = app.listen(5000, function() {  
   var host = server.address().address;
   var port = server.address().port;
 
