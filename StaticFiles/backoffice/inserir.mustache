@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Projeto DBM</title>
+    {{>css}}
+
+    <script>        
+        function inserir() {
+          {{#properties}}
+          var {{name}} = document.getElementById("{{name}}").value;
+          {{/properties}}
+
+          var params = "";
+          {{#properties}}
+            params+= "{{name}}=" + {{name}} + "&";
+          {{/properties}}
+
+          var xhr;
+          xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200) {
+                        window.location.href = "../{{title}}s";
+                }
+          }
+          xhr.open("POST", "../../../api/{{title}}", true);
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhr.send(params);
+        }
+    </script>
+  </head>
+  <body>
+     {{>menu}}
+
+    <!-- Page Content -->
+    <section class="py-5" style="margin-top: 20px">
+      <div class="container">
+      <h1 style="margin-top: -10px;">{{Titulo}}</h1>
+      <h2>{{SubTitulo}}</h2>
+      <br />
+    
+      {{#properties}}
+      <div class="form-group">
+            <label for="input">{{name}}</label>
+            <input type="text" class="form-control" id="{{name}}" name="{{name}}">
+        </div>
+        {{/properties}}
+        {{#references}}
+      <div class="form-group">
+            <label for="input">{{model}}</label>
+            <input type="text" class="form-control" id="{{model}}" name="{{model}}">
+        </div>
+        {{/references}}
+        <button onclick="inserir()">Inserir</button>
+        <a href="../{{title}}s">Voltar</a>
+      
+      
+      </div>
+    </section>
+
+    {{>footer}}
+    {{>scripts}}
+  </body>
+</html>

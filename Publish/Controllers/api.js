@@ -19,6 +19,7 @@ function mapping(object, type) {
 
 router.post('/categoria', function (req, res) {
     mapping(req.body, categoria).save(); //converte o objeto retornado no corpo do pedido num objeto do tipo categoria
+    res.redirect('../backoffice/categorias');
 });
 
 router.get('/categoria', function (req, res) {
@@ -62,6 +63,7 @@ router.get('/categoria/:model/:id', function (req, res) {
 
 router.post('/marca', function (req, res) {
     mapping(req.body, marca).save(); //converte o objeto retornado no corpo do pedido num objeto do tipo marca
+    res.redirect('../backoffice/marcas');
 });
 
 router.get('/marca', function (req, res) {
@@ -105,6 +107,7 @@ router.get('/marca/:model/:id', function (req, res) {
 
 router.post('/produto', function (req, res) {
     mapping(req.body, produto).save(); //converte o objeto retornado no corpo do pedido num objeto do tipo produto
+    res.redirect('../backoffice/produtos');
 });
 
 router.get('/produto', function (req, res) {

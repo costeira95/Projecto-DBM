@@ -1,11 +1,68 @@
 var express = require('express');
 var app = express();
 var mustacheExpress = require('mustache-express');
+var fs = require("fs");
 
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', './Publish/Views');
+var config = JSON.parse(fs.readFileSync("./Server/config.json"));
 
+
+//raiz do backoffice
+app.get('/', function (req, res) {
+        produto.all(function (rows) {
+            res.render('list', {
+                title: 'produto',
+                Titulo: "Bem Vindo ao BackOffice.",
+		        SubTitulo: "Faça, por exemplo, a gestão de produtos ou utilize o menu para navegar pelo que pretender.",
+                models: config.models,
+                rows: rows.map(obj => {
+                    return {
+                        properties: Object.keys(obj).map(key => {
+                            return {
+                                name: key,
+                                value: obj[key]
+                            }
+                        }),
+                        actions: [{
+                            label: '',
+                            link: './produtos/Detalhes/' + obj.id,
+                            image: {
+                                src: '../images/read.png'
+                            },
+                            tooltip: 'Detalhe'
+                        }, {
+                            label: '',
+                            link: './produtos/Editar/' + obj.id,
+                            image: {
+                                src: '../images/edit.png'
+                            },
+                            tooltip: 'Editar'
+                        }, {
+                            label: '',
+                            link: '#',
+                            image: {
+                                src: '../images/delete.png'
+                            },
+                            tooltip: 'Apagar',
+                            events: [{
+                                name: "onclick",
+                                function: "apagar",
+                                args: obj.id
+                            }]
+
+                        }]
+                    }
+                }),
+                columns: Object.keys(new produto()).map(key => {
+                    return {
+                        name: key
+                    };
+                })
+            });
+        });
+    });
 
 {{#properties}}
 
@@ -16,21 +73,41 @@ app.set('views', './Publish/Views');
 
     //get inserir {{title}}s
 
-    app.get('/{{title}}/inserir', function(req, res) {
-        res.render('form', {
+    app.get('/{{title}}s/inserir', function(req, res) {
+        res.render('inserir', {
+            title: '{{title}}',
+            models: config.models,
+            retroceder : "../",
+            Titulo: "Inserir {{title}}",
             properties : Object.keys(new {{title}}()).map(key => {
                     return {
                         name: key
                     };
-                })
+                }),
+            references: function () {
+				var allRefs = [];
+				if ({{title}}schema.references) {
+				{{title}}schema.references.forEach(function (ref) {
+					allRefs.push({
+						label: ref.label,
+						model: ref.model
+					});
+				});
+			}
+				return allRefs;
+			},
         });
     });
 
     //get detalhes {{title}}s
 
-    app.get('/{{title}}/detalhe/:id', function (req, res) {
+    app.get('/{{title}}s/detalhes/:id', function (req, res) {
 	{{title}}.get(req.params.id, function (row) {
 		res.render('details', {
+        title: '{{title}}',
+        models: config.models,
+        retroceder : "../../",
+        Titulo: "Detalhes de {{title}}",
 		properties: function () {
 			var allProps = Object.getOwnPropertyNames(row);
 			var validProps = [];
@@ -65,9 +142,13 @@ app.set('views', './Publish/Views');
 	});
 });
 
-    app.get('/{{title}}/editar/:id', function(req, res) {
+    app.get('/{{title}}s/editar/:id', function(req, res) {
         {{title}}.get(req.params.id, function(row) {
-            res.render('form', {
+            res.render('editar', {
+                title: '{{title}}',
+                models: config.models,
+                Titulo: "Editar {{title}}s",
+                retroceder : "../../",
                 properties : Object.getOwnPropertyNames(row).map(key => {
                     return {
                         name : key,
@@ -78,10 +159,12 @@ app.set('views', './Publish/Views');
         });
     });
 
-    app.get('/{{title}}', function (req, res) {
+    app.get('/{{title}}s', function (req, res) {
         {{title}}.all(function (rows) {
             res.render('list', {
                 title: '{{title}}',
+                Titulo: "Gestão de {{title}}s",
+                models: config.models,
                 rows: rows.map(obj => {
                     return {
                         properties: Object.keys(obj).map(key => {
@@ -92,14 +175,14 @@ app.set('views', './Publish/Views');
                         }),
                         actions: [{
                             label: '',
-                            link: './{{title}}/Detalhe/' + obj.id,
+                            link: './{{title}}s/Detalhes/' + obj.id,
                             image: {
                                 src: '../images/read.png'
                             },
                             tooltip: 'Detalhe'
                         }, {
                             label: '',
-                            link: './{{title}}/Editar/' + obj.id,
+                            link: './{{title}}s/Editar/' + obj.id,
                             image: {
                                 src: '../images/edit.png'
                             },

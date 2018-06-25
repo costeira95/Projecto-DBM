@@ -20,6 +20,7 @@ function mapping(object, type) {
 
 router.post('/{{title}}', function (req, res) {
     mapping(req.body, {{title}}).save(); //converte o objeto retornado no corpo do pedido num objeto do tipo {{title}}
+    res.redirect('../backoffice/{{title}}s');
 });
 
 router.get('/{{title}}', function (req, res) {

@@ -4,26 +4,22 @@
   "models": [
     {
       "name": "Home",
-      "FrontOfficeHref": "./",
-      "BackOfficeHref": "./"
-    },
-    {
-      "name": "Categorias",
-      "path": "./../Models/Schemas/categoria.js",
-      "FrontOfficeHref": "./categorias",
-      "BackOfficeHref": "./backoffice/produto"
-    },
-    {
-      "name": "Marcas",
-      "path": "./../Models/Schemas/marca.js",
-      "FrontOfficeHref": "./Marcas",
-      "BackOfficeHref": "./backoffice/produto"
+      "Href": "./"
     },
     {
       "name": "Produtos",
       "path": "./../Models/Schemas/produto.js",
-      "FrontOfficeHref": "./",
-      "BackOfficeHref": "./backoffice/produto"
+      "Href": "./produtos"
+    },
+    {
+      "name": "Categorias",
+      "path": "./../Models/Schemas/categoria.js",
+      "Href": "./categorias"
+    },
+    {
+      "name": "Marcas",
+      "path": "./../Models/Schemas/marca.js",
+      "Href": "./marcas"
     }
   ],
 
@@ -67,16 +63,32 @@
         "destinationPath" : "./Publish/Views/details.mustache"
       },
       {
-        "originalPath" : "./StaticFiles/backoffice/form.mustache",
-        "destinationPath" : "./Publish/Views/form.mustache"
+        "originalPath" : "./StaticFiles/backoffice/inserir.mustache",
+        "destinationPath" : "./Publish/Views/inserir.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/backoffice/editar.mustache",
+        "destinationPath" : "./Publish/Views/editar.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/backoffice/list.mustache",
+        "destinationPath" : "./Publish/Views/list.mustache"
       },
       {
         "originalPath" : "./StaticFiles/frontoffice/frontoffice.mustache",
         "destinationPath" : "./Publish/Views/frontoffice.mustache"
       },
       {
-        "originalPath" : "./StaticFiles/backoffice/list.mustache",
-        "destinationPath" : "./Publish/Views/list.mustache"
+        "originalPath" : "./StaticFiles/common/css.mustache",
+        "destinationPath" : "./Publish/Views/css.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/common/scripts.mustache",
+        "destinationPath" : "./Publish/Views/scripts.mustache"
+      },
+      {
+        "originalPath" : "./StaticFiles/common/footer.mustache",
+        "destinationPath" : "./Publish/Views/footer.mustache"
       },
       {
         "originalPath" : "./StaticFiles/common/menu.mustache",

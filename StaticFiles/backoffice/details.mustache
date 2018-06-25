@@ -1,6 +1,14 @@
-<html>
-<head>
-<script>
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Projeto DBM</title>
+    {{>css}}
+
+    <script>
     {{#hasReferences}}
         function loadValues(model,values,label,controlId,relatedModel){
             var xhr = new XMLHttpRequest();
@@ -24,17 +32,27 @@
             }
     {{/hasReferences}}
 </script>
-</head>
-<body>
+  </head>
+  <body>
+     {{>menu}}
+
+    <!-- Page Content -->
+    <section class="py-5" style="margin-top: 20px">
+      <div class="container">
+      <h1 style="margin-top: -10px;">{{Titulo}}</h1>
+      <h2>{{SubTitulo}}</h2>
+      <br />
+
     {{#properties}}
         <div>
             <label>{{name}}:</label>
             <label>{{value}}</label>
         </div>
     {{/properties}}
-    {{#references}}
-        <label>{{model}}:</label>
-        <label id="label{{model}}value"></label>
-    {{/references}}
-</body>
+     <a href="../../{{title}}s">Voltar</a>
+      </div>
+    </section>
+    {{>footer}}
+    {{>scripts}}
+  </body>
 </html>

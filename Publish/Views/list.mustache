@@ -1,6 +1,17 @@
-<html>
-<head>
-    <title>{{title}}</title>
+
+<!DOCTYPE html>
+<html lang="pt">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Projeto DBM</title>
+    {{>css}}
+
     <script>        
         function apagar(id) {
             var xhr = new XMLHttpRequest();
@@ -15,14 +26,26 @@
             xhr.send(); 
         }
     </script>
-</head>
-<body>
-    <table>
+  </head>
+
+  <body>
+     {{>menu}}
+
+    <!-- Page Content -->
+    <section class="py-5" style="margin-top: 20px">
+      <div class="container">
+      <h1 style="margin-top: -10px;">{{Titulo}}</h1>
+      <h2>{{SubTitulo}}</h2>
+      <br />
+      <table id="table" class="table table-striped table-bordered" style="width:100%">
+       <thead>
         <tr>
             {{#columns}}
-                <th>{{nome}}</th>
+                <th>{{name}}</th>
             {{/columns}}
         </tr>
+        </thead>
+        <tbody>
         {{#rows}}
         <tr>
             {{#properties}}
@@ -31,9 +54,9 @@
             </td>
             {{/properties}} 
             {{#actions}}
-            <td>
+            <td style="text-align: center;">
                 {{#link}}
-                    <a href="{{link}}" title="{{tooltip}}" {{#events}}{{nome}}="javascript:{{function}}({{args}})" {{/events}}>
+                    <a href="{{link}}" title="{{tooltip}}" {{#events}}{{name}}="javascript:{{function}}({{args}})" {{/events}}>
                         {{label}}
                         {{#image}}
                             <img src="{{src}}" alt="{{alt}}" />
@@ -45,8 +68,13 @@
             {{/actions}}
         </tr>
         {{/rows}}
+        </tbody>
     </table>
-    <input type="button" value="Inserir" onclick="javascript:window.location.replace('./{{title}}/Inserir')" />
-</body>
+    <input type="button" value="Inserir" onclick="javascript:window.location.replace('./{{title}}s/Inserir')" />
+      </div>
+    </section>
 
+    {{>footer}}
+    {{>scripts}}
+  </body>
 </html>
