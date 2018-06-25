@@ -46,7 +46,7 @@ function gerarBd(req, res) {
   res.sendStatus(200);
 }
 
-function gerarApi(req, res) {
+function gerarApi(req, res) { 
   api_generator.generate({schema_categoria, schema_marca, schema_produto});
   res.sendStatus(200);
 }

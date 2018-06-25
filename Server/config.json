@@ -87,6 +87,10 @@
         "destinationPath" : "./Publish/Public/css/bootstrap.min.css"
       },
       {
+        "originalPath" : "./StaticFiles/bootstrap/styles.css",
+        "destinationPath" : "./Publish/Public/css/styles.css"
+      },
+      {
         "originalPath" : "./StaticFiles/bootstrap/bootstrap.bundle.min.js",
         "destinationPath" : "./Publish/Public/js/bootstrap.bundle.min.js"
       },
